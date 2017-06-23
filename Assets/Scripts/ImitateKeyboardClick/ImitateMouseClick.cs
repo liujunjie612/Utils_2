@@ -45,19 +45,29 @@ public class ImitateMouseClick : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("手动触发A键Down");
-            DoMouseClick(100, 100);
+            DoMouseClick(0, 0);
         }
 
         if(Input.GetMouseButtonDown(0))
         {
             Debug.Log("模拟鼠标左键Down事件");
         }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("模拟鼠标左键Up事件");
+        }
     }
 
+    /// <summary>
+    /// 调用鼠标点击事件（传的参数x,y要在应用内才会调用鼠标事件）
+    /// </summary>
+    /// <param name="x">相对屏幕左上角的X轴坐标</param>
+    /// <param name="y">相对屏幕左上角的Y轴坐标</param>
     private static void DoMouseClick(int x, int y)
     {
         int dx = (int)((double)x / Screen.width * 65535); //屏幕分辨率映射到0~65535(0xffff,即16位)之间
         int dy = (int)((double)y / Screen.height * 0xffff); //转换为double类型运算，否则值为0、1
-        mouse_event(MouseEventFlag.Move | MouseEventFlag.LeftDown | MouseEventFlag.LeftUp | MouseEventFlag.Absolute, dx, dy, 0, new UIntPtr(0)); //点击
+        mouse_event(MouseEventFlag.Move | MouseEventFlag.LeftDown | MouseEventFlag.LeftUp, dx, dy, 0, new UIntPtr(0)); //点击
     }
 }
