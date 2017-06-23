@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class ImitateMouseClick : MonoBehaviour {
+public class ImitateKeyboardClick : MonoBehaviour {
 
     /// <summary>
     /// 模拟按键  按键对应表：http://www.doc88.com/p-895906443391.html
@@ -15,20 +15,16 @@ public class ImitateMouseClick : MonoBehaviour {
     [DllImport("user32.dll", EntryPoint = "keybd_event")]
     public static extern void Keybd_event(byte bvk, byte bScan, int dwFlags, int dwExtraInfo);
 
-    void Start()
-    {
-
-    }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("手动触发A键Down");
             Keybd_event(27, 0, 1, 0);
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("模拟按键Esc键Down");
         }
